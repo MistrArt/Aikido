@@ -36,12 +36,19 @@ namespace Aikido.Services
             return clubEntity;
         }
 
+
+        public async Task<List<ClubEntity>> GetClubsList()
+        {
+            return await context.Clubs.OrderBy(club => club.Name)
+                .ToListAsync();
+        }
+
         public async Task<long> CreateClub(ClubDto clubData)
         {
             var clubEntity = new ClubEntity();
             clubEntity.UpdateFromJson(clubData);
 
-            context.Users.Add(clubEntity);
+            context.Clubs.Add(clubEntity);
 
             await SaveDb();
 
@@ -59,6 +66,7 @@ namespace Aikido.Services
             await SaveDb();
 
         }
+
         public async Task UpdateClub(long id, ClubDto clubNewData)
         {
             var clubEntity = await context.Clubs.FindAsync(id);
@@ -69,6 +77,5 @@ namespace Aikido.Services
 
             await SaveDb();
         }
-
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Aikido.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Aikido.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250703085414_FixedGroups")]
+    partial class FixedGroups
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,9 +96,6 @@ namespace Aikido.Migrations
                     b.Property<string>("City")
                         .HasColumnType("text");
 
-                    b.Property<long?>("ClubId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -128,14 +128,11 @@ namespace Aikido.Migrations
                     b.Property<DateTime?>("RegistrationDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Role")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("SchoolClass")
+                    b.Property<int>("Role")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Sex")
-                        .HasColumnType("text");
+                    b.Property<int?>("Sex")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
