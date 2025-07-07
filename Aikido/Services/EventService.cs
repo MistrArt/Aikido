@@ -29,7 +29,7 @@ namespace Aikido.Services
 
         public async Task<ClubEntity> GetEventById(long id)
         {
-            var eventEntity = await context.Clubs.FindAsync(id);
+            var eventEntity = await context.Events.FindAsync(id);
             if (eventEntity == null)
                 throw new KeyNotFoundException($"Мероприятие с Id = {id} не найден.");
 
@@ -38,7 +38,7 @@ namespace Aikido.Services
 
         public async Task<long> CreateEvent(EventDto eventData)
         {
-            var eventEntity = new eventEntity();
+            var eventEntity = new EventEntity();
             eventEntity.UpdateFromJson(eventData);
 
             context.Events.Add(eventEntity);
